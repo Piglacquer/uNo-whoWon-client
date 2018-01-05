@@ -6,9 +6,16 @@
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <h1>Add Players</h1>
+    <select class="scoreThreshold" name="scoreThreshold">
+      <option value='scores' disabled selected>Score Threshold</option>
+      <option value='250'>250</option>
+      <option value='500'>500</option>
+      <option value='750'>750</option>
+      <option value='1000'>1000</option>
+    </select>
+    <h1># of Players:</h1>
     <div class='players'>
-      <form>
+      <form class = 'players'>
         <input class='numberOfPlayers' type='submit' value='1'/>
         <input class='numberOfPlayers' type='submit' value='2'/>
         <input class='numberOfPlayers' type='submit' value='3'/>

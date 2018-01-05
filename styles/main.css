@@ -1,17 +1,84 @@
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-image: url("../Assets/uno-bg.png");
+  background-position: center;
+  height: 100vh;
+}
+
 h1 {
   font-family: arial;
   font-style: bold;
+  color: white;
 }
 
-#player {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  font-size: 2rem;
-}
-
-#playersAndScoresSection {
+.playersAndScoresSection {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+  width: 60vh;
 }
+
+#player {
+  margin: 2vh;
+}
+
+.players {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  width: 48vh;
+}
+
+.numberOfPlayers {
+  background-color: blue;
+  color: white;
+  height: 10vh;
+  width: 20vh;
+  border-radius: 15px;
+  border-color: blue;
+  margin: 1vh;
+}
+
+.submit, #newNext, .tally, #home {
+  background-color: green;
+  color: white;
+  height: 10vh;
+  width: 40vh;
+  border-radius: 15px;
+  border-color: green;
+  margin: 1vh;
+}
+
+.scoreThreshold {
+  width: 40vh;
+  height: 10vh;
+}
+
+label, b {
+  font-family: arial;
+  font-style: bold;
+  font-size: 1.5rem;
+  color: white;
+  padding: 1vh;
+  width: 5vh;
+  height: 5vh;
+}
+
+input {
+  width: 10vh;
+  height: 5vh;
+}
+
+.player0, .player1, .player2, .player3, .player4, .player5, .player6, .player7 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ p {
+   color: white;
+ }

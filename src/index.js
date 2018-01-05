@@ -1,30 +1,58 @@
-const baseURL = "https://dry-badlands-62759.herokuapp.com/"
+// const baseURL = "https://uno-who-won.herokuapp.com/scores.html"
+const baseURL = "http://localhost:3000/scores.html"
+// const gamesURL = "https://uno-who-won.herokuapp.com/games"
+const gamesURL = "http://localhost:3000/games"
 const body = document.querySelector('body')
 let playerAmount
-let playerNames = []
+let pastPlayerNames = []
+let currentPlayerNames = []
 let playerScores = []
 let scoreThreshold
 
+get()
+thresholdListener()
 playerNumberToUrl()
 populatePlayerInputs()
 
-fetch(baseURL)
+function get(){
+  fetch(baseURL)
   .then(response => response.json())
   .then(response => {
-    console.log(response)
+    addPastPlayers(response)
   })
   .catch(err => console.log(err))
+}
 
-fetch(baseURL,  {
-  method: "post",
-  body: JSON.stringify({greeting: "hello"}),
-  headers: new Headers({
-    "Content-Type": "application/json"
+function populatePlayerDropdown(parent){
+  pastPlayerNames.forEach((player) => {
+    domCreateAndAppend('option', parent, player)
   })
-})
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.log(err))
+}
+
+// ADD SOMETHING TO PREVENT SAME PLAYER NAMES
+function listenForPlayerNames(element){
+  element.addEventListener('change', function() {
+      currentPlayerNames.push(element.value)
+      // for (var i = 0; i < currentPlayerNames.length; i++){
+      //   if (currentPlayerNames[i] == element.value) {
+      //     currentPlayerNames.splice([i],1)
+        // }
+      // }
+  })
+}
+
+function addPastPlayers(resp){
+  resp.forEach((player) => {
+    pastPlayerNames.push(player.playerName)
+  })
+}
+
+function thresholdListener(){
+  let thresholdSelector = document.querySelector('.scoreThreshold')
+  thresholdSelector.addEventListener('change', function(event){
+    scoreThreshold = event.target.value
+  })
+}
 
 function playerNumberToUrl(){
   var players = document.querySelectorAll('.numberOfPlayers')
@@ -46,31 +74,37 @@ function populatePlayerInputs(){
 
   submit.addEventListener('click', function(){
     wipePage(form)
+
     let newForm = document.createElement('form')
     div.appendChild(newForm)
+
     for (var i = 0; i < playerAmount; i++) {
-      // domCreateAndAppend('div', newForm, '', 'player')
       let container = document.createElement('div')
       container.id = 'player'
       newForm.appendChild(container)
-      // domCreateAndAppend('label', document.querySelector('.player'), 'player ' +[i+1])
+
       let label = document.createElement('label')
       label.innerText = 'player '+[i+1]
       container.appendChild(label)
-      let input = document.createElement('input')
-      input.id = 'playerName'
-      input.type = 'text'
-      input.placeholder = 'name'
-      container.appendChild(input)
+
+      let select = document.createElement('select')
+      select.id = 'playerName'
+      select.type = 'text'
+
+      domCreateAndAppend('option', select, 'select player')
+      populatePlayerDropdown(select)
+      listenForPlayerNames(select)
+      container.appendChild(select)
     }
 
     createNewNext(body, 'newNext', 'next', function(){
-      getPlayerNames()
+      // getPlayerNames()
       wipePage(div)
       wipePage(title)
+
       let next = document.getElementById('newNext')
       next.parentNode.removeChild(next)
-      scoreboard(playerNames, body)
+      scoreboard(currentPlayerNames, body)
     })
   })
 }
@@ -88,23 +122,21 @@ function createNewNext(parent, id, value, func){
   newNext.addEventListener('click', func)
 }
 
-function getPlayerNames(){
-    let playerInputs = document.querySelectorAll('#playerName')
-    playerInputs.forEach((player) => {
-      playerNames.push(player.value)
-    })
-}
-
 function scoreboard(array){
   domCreateAndAppend('h1', body, 'Uno What Time It Is')
   domCreateAndAppend('div', body, '', 'playersAndScoresSection')
-  array.forEach((player) => {
-    domCreateAndAppend('div', document.querySelector('.playersAndScoresSection'), '', 'player')
-    domCreateAndAppend('label', document.querySelector('.playersAndScoresSection'), player)
-    domCreateAndAppend('input', document.querySelector('.playersAndScoresSection'), '', 'newPlayerScores')
-    domCreateAndAppend('b', document.querySelector('.playersAndScoresSection'), 0)
+
+  array.forEach((player, i) => {
+    domCreateAndAppend('div', document.querySelector('.playersAndScoresSection'), '', 'player' + [i])
+    domCreateAndAppend('label', document.querySelector('.player' + [i]), player)
+    domCreateAndAppend('input', document.querySelector('.player' + [i]), '', 'newPlayerScores')
+    domCreateAndAppend('b', document.querySelector('.player' + [i]), 0)
     let playerScore = []
     playerScores.push(playerScore)
+  })
+  let inputs = document.querySelectorAll('input')
+  inputs.forEach((input) => {
+    input.type = 'number'
   })
   tallyButton()
 }
@@ -113,24 +145,39 @@ function tallyButton(){
   let newScores = document.querySelectorAll('.newPlayerScores')
   let currentScore = document.querySelectorAll('b')
   domCreateAndAppend('input', document.querySelector('body'), '', 'tally')
+
   let tally = document.querySelector('.tally')
   tally.type = 'submit'
   tally.value = 'tally'
   tally.addEventListener('click', function(event){
     event.preventDefault()
     let freshScoresArray = []
+
     newScores.forEach((score) => {
       freshScoresArray.push(score.value)
     })
+
     for (var i = 0; i < playerScores.length; i++) {
       playerScores[i].push(parseInt(freshScoresArray[i]))
     }
+
     playerScores.forEach((player, i) => {
       let score = player.reduce((accumulator, currentValue) => {
         return accumulator + currentValue
       }, 0)
       currentScore[i].innerText = score
     })
+
+    checkScore()
+    whoIsWinner()
+    resetNewScores()
+  })
+}
+
+function resetNewScores(){
+  let newScores = document.querySelectorAll('.newPlayerScores')
+  newScores.forEach((player) => {
+    player.value = ''
   })
 }
 
@@ -143,9 +190,84 @@ function domCreateAndAppend(element, parent, textContent, className){
 
 function checkScore(){
   let scores = document.querySelectorAll('b')
+
   scores.forEach((score) => {
-    if(score >= scoreThreshold){
-      alert('someone wins')
+    if(score.textContent >= scoreThreshold){
+      whoIsWinner()
     }
   })
+}
+
+function whoIsWinner(){
+  let players =
+  document.querySelector('.playersAndScoresSection').childNodes
+  let scores = []
+  let winnerText = document.querySelector('h1')
+
+  for (var i = 0; i < players.length; i++){
+    scores.push(parseInt(players[i].childNodes[2].textContent))
+  }
+
+  let winnerScore = scores.reduce(function(a,b){
+    return Math.min(a,b)
+  })
+
+  for (var j = 0; j < players.length; j++){
+    if (winnerScore == players[j].childNodes[2].textContent) {
+      winnerText.textContent = players[j].childNodes[0].textContent
+    }
+  }
+  changeTallyButtonToHome()
+}
+
+function changeTallyButtonToHome(){
+  let tally = body.lastChild
+  wipePage(tally)
+  createNewNext(body, 'home', 'home', post)
+}
+
+async function post(){
+  let game = await fetchScores()
+  let gameWinner = await changePlayerNameToId()
+  fetch(gamesURL,  {
+    method: "post",
+    body: JSON.stringify({gameId: game, gameWinnerId: gameWinner}),
+    headers: new Headers({
+      "Content-Type": "application/json"
+    })
+  })
+    .then(response => {
+      console.log(response)
+      return response.json()
+    })
+    .then(response => {
+      // fetchScores()
+      console.log(response);
+    })
+    .catch(err => console.log(err))
+  // console.log(gameId)
+}
+
+function fetchScores() {
+  return fetch(gamesURL)
+  .then((resp) => resp.json())
+  .then((resp) => {
+    console.log(resp.length + 1, 'should be gameId')
+    let gameNumber = resp.length + 1
+    return gameNumber
+  })
+}
+
+function changePlayerNameToId(){
+  let playerName = document.querySelector('h1').textContent
+  console.log(playerName)
+  return fetch(baseURL)
+    .then((resp) => resp.json())
+    .then((resp) => {
+      for (var i = 0; i < resp.length; i++) {
+        if(playerName == resp[i].playerName) {
+          return resp[i].playerId
+        }
+      }
+    })
 }
