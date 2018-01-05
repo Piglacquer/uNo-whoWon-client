@@ -1,7 +1,7 @@
-// const baseURL = "https://uno-who-won.herokuapp.com/scores.html"
-const baseURL = "http://localhost:3000/scores.html"
-// const gamesURL = "https://uno-who-won.herokuapp.com/games"
-const gamesURL = "http://localhost:3000/games"
+const baseURL = "https://uno-who-won.herokuapp.com/scores.html"
+//const baseURL = "http://localhost:3000/scores.html"const
+gamesURL = "https://uno-who-won.herokuapp.com/games"
+//const gamesURL = "http://localhost:3000/games"
 const body = document.querySelector('body')
 let playerAmount
 let pastPlayerNames = []
