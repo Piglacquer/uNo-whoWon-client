@@ -4,7 +4,8 @@ body {
   align-items: center;
   background-image: url("../Assets/uno-bg.png");
   background-position: center;
-  height: 100vh;
+  background-repeat: no-repeat;
+  width: 100vw;
 }
 
 h1 {
