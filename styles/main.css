@@ -37,9 +37,9 @@ h1 {
   background-color: blue;
   color: white;
   height: 10vh;
-  width: 20vh;
-  border-radius: 15px;
-  border-color: blue;
+  width: 10vh;
+  border-radius: 100px;
+  border-style: none;
   margin: 1vh;
 }
 
@@ -47,9 +47,20 @@ h1 {
   background-color: green;
   color: white;
   height: 10vh;
-  width: 40vh;
-  border-radius: 15px;
-  border-color: green;
+  width: 50vh;
+  border-style: none;
+  margin: 1vh;
+}
+
+.anchor {
+  background-color: green;
+  color: white;
+  line-height: 50px;
+  width: 50vh;
+  height: 10vh;
+  font-family: arial;
+  text-decoration: none;
+  text-align: center;
   margin: 1vh;
 }
 

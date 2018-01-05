@@ -1,7 +1,5 @@
 const baseURL = "https://uno-who-won.herokuapp.com/scores.html"
-//const baseURL = "http://localhost:3000/scores.html"const
-gamesURL = "https://uno-who-won.herokuapp.com/games"
-//const gamesURL = "http://localhost:3000/games"
+const gamesURL = "https://uno-who-won.herokuapp.com/games"
 const body = document.querySelector('body')
 let playerAmount
 let pastPlayerNames = []
@@ -33,11 +31,6 @@ function populatePlayerDropdown(parent){
 function listenForPlayerNames(element){
   element.addEventListener('change', function() {
       currentPlayerNames.push(element.value)
-      // for (var i = 0; i < currentPlayerNames.length; i++){
-      //   if (currentPlayerNames[i] == element.value) {
-      //     currentPlayerNames.splice([i],1)
-        // }
-      // }
   })
 }
 
@@ -98,7 +91,6 @@ function populatePlayerInputs(){
     }
 
     createNewNext(body, 'newNext', 'next', function(){
-      // getPlayerNames()
       wipePage(div)
       wipePage(title)
 
@@ -221,9 +213,16 @@ function whoIsWinner(){
 }
 
 function changeTallyButtonToHome(){
+  console.log(body)
   let tally = body.lastChild
   wipePage(tally)
-  createNewNext(body, 'home', 'home', post)
+  createNewNext(body, 'home', 'Post', post)
+}
+
+function addHomeButtonWhenGameOver(){
+  domCreateAndAppend('a', body, 'Home', 'anchor')
+  let home = document.querySelector('a')
+  home.href = 'index.html'
 }
 
 async function post(){
@@ -241,11 +240,12 @@ async function post(){
       return response.json()
     })
     .then(response => {
-      // fetchScores()
       console.log(response);
     })
     .catch(err => console.log(err))
-  // console.log(gameId)
+  let tally = body.lastChild
+  wipePage(tally)
+  addHomeButtonWhenGameOver()
 }
 
 function fetchScores() {
