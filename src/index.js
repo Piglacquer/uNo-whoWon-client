@@ -206,7 +206,8 @@ function whoIsWinner(){
 
   for (var j = 0; j < players.length; j++){
     if (winnerScore == players[j].childNodes[2].textContent) {
-      winnerText.textContent = players[j].childNodes[0].textContent
+      winnerText.value = players[j].childNodes[0].textContent
+      winnerText.textContent = players[j].childNodes[0].textContent + " WINS!"
     }
   }
   changeTallyButtonToHome()
@@ -259,7 +260,8 @@ function fetchScores() {
 }
 
 function changePlayerNameToId(){
-  let playerName = document.querySelector('h1').textContent
+  let playerName = document.querySelector('h1').value
+  console.log(playerName, 'value selection')
   console.log(playerName)
   return fetch(baseURL)
     .then((resp) => resp.json())

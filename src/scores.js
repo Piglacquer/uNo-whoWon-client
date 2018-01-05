@@ -1,9 +1,6 @@
 const baseURL = "https://uno-who-won.herokuapp.com/"
-//const baseURL = "http://localhost:3000/scores.html"
 const gameURL = "https://uno-who-won.herokuapp.com/games"
-//const gameURL = "http://localhost:3000/games"
 const scoresURL = "https://uno-who-won.herokuapp.com/scores.html"
-//const scoresURL = "http://localhost:3000/scores.html"
 let winners = []
 let players
 
