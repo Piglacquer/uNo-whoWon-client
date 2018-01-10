@@ -1,103 +1,137 @@
 body {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  background-image: url("../Assets/uno-bg.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100vw;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	background-image: url('../Assets/uno-bg.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 100vw;
 }
 
 h1 {
-  font-family: arial;
-  font-style: bold;
-  color: white;
+	font-family: arial;
+	font-style: bold;
+	color: white;
 }
 
 .playersAndScoresSection {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  width: 60vh;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	width: 60vh;
 }
 
 #player {
-  margin: 2vh;
+	margin: 2vh;
 }
 
 .players {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  width: 48vh;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+	width: 48vh;
 }
 
 .numberOfPlayers {
-  background-color: blue;
-  color: white;
-  height: 10vh;
-  width: 10vh;
-  border-radius: 100px;
-  border-style: none;
-  margin: 1vh;
-  -webkit-appearance: none;
+	background-color: blue;
+	color: white;
+	height: 10vh;
+	width: 10vh;
+	border-radius: 100px;
+	border-style: none;
+	margin: 1vh;
+	-webkit-appearance: none;
 }
 
-.submit, #newNext, .tally, #home {
-  background-color: green;
-  color: white;
-  height: 10vh;
-  width: 50vh;
-  border-style: none;
-  margin: 1vh;
-  -webkit-appearance: none;
+.submit,
+#newNext,
+.tally,
+#home {
+	background-color: green;
+	color: white;
+	height: 10vh;
+	width: 50vh;
+	border-style: none;
+	margin: 1vh;
+	-webkit-appearance: none;
 }
 
 .anchor {
-  background-color: green;
-  color: white;
-  line-height: 60px;
-  width: 50vh;
-  height: 10vh;
-  font-family: arial;
-  text-decoration: none;
-  text-align: center;
-  margin: 1vh;
+	background-color: green;
+	color: white;
+	line-height: 2.5rem;
+	width: 50vh;
+	height: 10vh;
+	font-family: arial;
+	text-decoration: none;
+	text-align: center;
+	margin: 1vh;
 }
 
 .scoreThreshold {
-  width: 40vh;
-  height: 10vh;
+	width: 40vh;
+	height: 10vh;
 }
 
-label, b {
-  font-family: arial;
-  font-style: bold;
-  font-size: 1.5rem;
-  color: white;
-  padding: 1vh;
-  width: 5vh;
-  height: 5vh;
+label,
+b {
+	font-family: arial;
+	font-style: bold;
+	font-size: 1.5rem;
+	color: white;
+	padding: 1vh;
+	width: 5vh;
+	height: 5vh;
 }
 
 input {
-  width: 10vh;
-  height: 5vh;
-  font-size: 16px;
+	width: 10vh;
+	height: 5vh;
+	font-size: 16px;
 }
 
-.player0, .player1, .player2, .player3, .player4, .player5, .player6, .player7 {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
+.player0,
+.player1,
+.player2,
+.player3,
+.player4,
+.player5,
+.player6,
+.player7 {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
 }
 
- p {
-   color: white;
- }
+p {
+	color: white;
+}
 
 option {
-  font-size: 16px;
+	font-size: 16px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 50vh;
+}
+
+.scorePlayerName,
+.wins {
+	width: auto;
+	height: auto;
+	color: black;
+}
+
+.playerContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem;
+	color: black;
+	background-color: white;
 }
