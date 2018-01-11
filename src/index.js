@@ -187,9 +187,7 @@ function domCreateAndAppend(element, parent, textContent, className) {
 
 function checkScore() {
 	let scores = document.querySelectorAll('b')
-	console.log(scoreThreshold, 'checkScore')
 	scores.forEach(score => {
-		console.log(parseInt(score.textContent))
 		if (parseInt(score.textContent) >= scoreThreshold) {
 			whoIsWinner()
 		}
@@ -219,7 +217,6 @@ function whoIsWinner() {
 }
 
 function changeTallyButtonToHome() {
-	console.log(body)
 	let tally = body.lastChild
 	wipePage(tally)
 	createNewNext(body, 'home', 'Post', post)
@@ -242,11 +239,7 @@ async function post() {
 		})
 	})
 		.then(response => {
-			console.log(response)
 			return response.json()
-		})
-		.then(response => {
-			console.log(response)
 		})
 		.catch(err => console.log(err))
 	let tally = body.lastChild
@@ -258,7 +251,6 @@ function fetchScores() {
 	return fetch(gamesURL)
 		.then(resp => resp.json())
 		.then(resp => {
-			console.log(resp.length + 1, 'should be gameId')
 			let gameNumber = resp.length + 1
 			return gameNumber
 		})
@@ -266,8 +258,6 @@ function fetchScores() {
 
 function changePlayerNameToId() {
 	let playerName = document.querySelector('h1').value
-	console.log(playerName, 'value selection')
-	console.log(playerName)
 	return fetch(baseURL)
 		.then(resp => resp.json())
 		.then(resp => {
