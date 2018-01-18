@@ -135,3 +135,10 @@ option {
 	color: black;
 	background-color: white;
 }
+
+p {
+	display: flex;
+	flex-flow: column wrap;
+	color: white;
+	width: 75vh;
+}
