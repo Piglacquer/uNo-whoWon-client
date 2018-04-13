@@ -11,3 +11,6 @@
 # Future iterations
 * Would rather use a framework to build it, but did this for a school project that required vanilla html, css, and js.
 * Attach a database so that the scores persist.
+
+# Contact
+Patrick Biffle - pbiffle@gmail.com
