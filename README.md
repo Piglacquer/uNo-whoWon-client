@@ -1,5 +1,7 @@
 # uNo-whoWon-client
 
+![uno](https://user-images.githubusercontent.com/32248824/38758744-b10097a4-3f2f-11e8-82b9-1756efdae344.png)
+
 # What is it?
 * Friends and I had been playing a lot of uno in our downtime, and our particular rules caused each game to move too quickly. We began keeping score, and I'm no good at math so I made an app to do the math for me.
 
